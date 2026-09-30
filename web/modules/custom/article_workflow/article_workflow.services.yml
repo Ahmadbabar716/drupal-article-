@@ -1,0 +1,3 @@
+services:
+  article_workflow.meta_description:
+    class: Drupal\article_workflow\MetaDescriptionGenerator

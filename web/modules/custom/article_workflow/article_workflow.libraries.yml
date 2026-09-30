@@ -1,0 +1,7 @@
+meta_preview:
+  version: 1.0
+  js:
+    js/meta-preview.js: {}
+  dependencies:
+    - core/drupal
+    - core/once

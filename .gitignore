@@ -1,0 +1,12 @@
+/vendor/
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+/web/libraries/
+/web/sites/*/files/
+/web/sites/*/settings.local.php
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.astro/
+.ddev/

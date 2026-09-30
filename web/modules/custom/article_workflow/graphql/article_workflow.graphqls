@@ -1,0 +1,27 @@
+type Query {
+  "Load a single published or unpublished article by node ID."
+  article(id: Int!): Article
+}
+
+type Article {
+  id: Int!
+  title: String!
+  path: String
+  published: Boolean!
+  teaser: String
+  metaDescription: String
+  body: String
+  image: Image
+  sections: [Section]
+}
+
+type Image {
+  url: String
+  alt: String
+}
+
+type Section {
+  id: Int!
+  type: String!
+  text: String
+}

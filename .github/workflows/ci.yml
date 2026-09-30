@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer update --no-interaction --prefer-dist --no-progress
+
+      - name: PHP lint (PHP 8.3)
+        run: find web/modules/custom scripts \( -name '*.php' -o -name '*.module' \) -print0 | xargs -0 -n1 php -l
+
+      - name: Drupal coding standards
+        run: vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,yml web/modules/custom
+
+      - name: Unit tests
+        run: vendor/bin/phpunit -c web/core web/modules/custom/article_workflow/tests/src/Unit

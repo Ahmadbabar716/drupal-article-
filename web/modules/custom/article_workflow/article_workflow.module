@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the Article Workflow module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\article_workflow\MetaDescriptionGenerator;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for node entities.
+ */
+function article_workflow_node_presave(NodeInterface $node): void {
+  if ($node->bundle() !== 'article') {
+    return;
+  }
+  \Drupal::service('article_workflow.meta_description')->apply($node);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ *
+ * Adds a live preview of the auto meta description so editors can see
+ * what will be published before they save.
+ */
+function article_workflow_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
+  $node = $form_state->getFormObject()->getEntity();
+  // Only active after scripts/02-improve-article-form.php has been run, so
+  // the "before" form can be recorded for comparison.
+  if ($node->bundle() !== 'article' || !\Drupal::state()->get('article_workflow.form_improved')) {
+    return;
+  }
+  if (empty($form['field_teaser']['widget'][0]['value']) || empty($form['field_meta_description']['widget'][0]['value'])) {
+    return;
+  }
+
+  $form['field_teaser']['widget'][0]['value']['#attributes']['data-aw-teaser'] = 'true';
+
+  $meta = &$form['field_meta_description']['widget'][0]['value'];
+  $meta['#attributes']['data-aw-meta'] = 'true';
+  $meta['#attributes']['data-aw-max'] = (string) MetaDescriptionGenerator::MAX_LENGTH;
+  $meta['#attributes']['placeholder'] = t('Auto-filled from the teaser summary. Type here only to override it.');
+
+  $form['#attached']['library'][] = 'article_workflow/meta_preview';
+}

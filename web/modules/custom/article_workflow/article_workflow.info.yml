@@ -1,0 +1,12 @@
+name: 'Article Workflow'
+type: module
+description: 'Streamlines the article editing form: grouped fields, clearer help text, auto meta description from the teaser, and a GraphQL schema for the headless frontend.'
+core_version_requirement: ^10.3 || ^11
+package: Custom
+dependencies:
+  - drupal:node
+  - drupal:text
+  - paragraphs:paragraphs
+  - entity_reference_revisions:entity_reference_revisions
+  - field_group:field_group
+  - graphql:graphql
