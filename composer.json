@@ -32,7 +32,11 @@
             "drupal/core-composer-scaffold": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "tbachert/spi": true
+            "tbachert/spi": true,
+            "symfony/runtime": true,
+            "drupal/core-project-message": true,
+            "cweagans/composer-patches": true,
+            "mglaman/composer-drupal-lenient": true
         },
         "sort-packages": true,
         "policy": {
