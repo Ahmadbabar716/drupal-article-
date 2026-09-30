@@ -115,3 +115,4 @@ frontend/src/pages/index.astro         # Astro page reading from GraphQL
 ## Next steps from the brief (not in this demo)
 
 Paragraphs usability, reliable previews, Google Docs import, Gemini one-line summary (after feasibility and cost review), deployment smoke tests across Pantheon environments, Config Split cleanup and CKEditor image persistence to S3.
+
