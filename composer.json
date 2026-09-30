@@ -34,7 +34,23 @@
             "phpstan/extension-installer": true,
             "tbachert/spi": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "policy": {
+            "advisories": {
+                "ignore-id": [
+                    "PKSA-xwpn-zs9j-6wy5",
+                    "PKSA-sf9j-1gs7-xzvx",
+                    "PKSA-7h5p-prw9-w5nr"
+                ]
+            }
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-xwpn-zs9j-6wy5",
+                "PKSA-sf9j-1gs7-xzvx",
+                "PKSA-7h5p-prw9-w5nr"
+            ]
+        }
     },
     "extra": {
         "drupal-scaffold": {

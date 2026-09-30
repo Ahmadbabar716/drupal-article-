@@ -87,6 +87,10 @@ ddev exec vendor/bin/phpunit -c web/core web/modules/custom/article_workflow/tes
 ddev exec vendor/bin/phpcs --standard=Drupal,DrupalPractice web/modules/custom
 ```
 
+## Security note
+
+The GraphQL 4 module depends on webonyx/graphql-php 14.x, which has known security advisories (PKSA-xwpn-zs9j-6wy5, PKSA-sf9j-1gs7-xzvx, PKSA-7h5p-prw9-w5nr). Composer blocks these by default, so they are explicitly allowed in composer.json for this local demo only. On a production platform, this dependency should be reviewed and an upgrade path planned.
+
 ## Rollback
 
 All form changes are configuration. Rollback = revert the config commit and run `ddev drush config:import -y`. `scripts/rollback-article-form.php` also turns off the live preview for the local demo.
